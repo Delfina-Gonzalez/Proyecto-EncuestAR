@@ -1,0 +1,2 @@
+data/clean/individuos_unificado.txt filter=lfs diff=lfs merge=lfs -text
+data/processed/individuos_procesados.txt filter=lfs diff=lfs merge=lfs -text
