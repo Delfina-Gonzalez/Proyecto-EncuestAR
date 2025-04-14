@@ -4,47 +4,49 @@ import csv
 
 
 
-# Agregamos el path si se necesitan módulos de ../Data
+# Agregamos el path si se necesitan módulos de ../data
 sys.path.append(os.path.abspath("../data"))
 
-def leer_archivo(ruta_archivo):
-    with open(ruta_archivo, encoding='utf-8') as archivo_csv:
-        reader = csv.reader(archivo_csv, delimiter=";")
+
+def read_file(file_path):
+    with open(file_path, encoding='utf-8') as file_csv:
+        reader = csv.reader(file_csv, delimiter=";")
         return list(reader)
 
-def procesar_archivos(ruta, tipo="hogar"):
-    datos_unificados = []
-    cabecera = None
+def process_file(source_path, category="hogar"):
+    unified_data = []
+    header = None
 
-    for nombre_archivo in os.listdir(ruta):
-        if tipo in nombre_archivo and nombre_archivo.endswith(".txt"):
-            ruta_archivo = os.path.join(ruta, nombre_archivo)
-            filas = leer_archivo(ruta_archivo)
+    for file_name in os.listdir(source_path):
+        if category in file_name and file_name.endswith(".txt"):
+            file_path = os.path.join(source_path, file_name)
+            row = read_file(file_path)
 
-            if not filas:
+            if not row:
                 continue
 
-            if cabecera is None:
-                cabecera = filas[0]
-                datos_unificados.extend(filas[1:])
+            if header is None:
+                header = row[0]
+                header.extend(row[1:])
             else:
-                if filas[0] == cabecera:
-                    datos_unificados.extend(filas[1:])
+                if row[0] == header:
+                    unified_data.extend(row[1:])
                 else:
-                    print(f"⚠️ Cabecera diferente en: {nombre_archivo}")
+                    print(f"⚠️ Cabecera diferente en: {file_name}")
 
-    return [cabecera] + datos_unificados if cabecera else []
+    return [header] + unified_data if header else []
 
-def guardar_en_txt(datos, ruta_destino, nombre_archivo="hogares_unificados.txt"):
-    ruta_completa = os.path.join(ruta_destino, nombre_archivo)
-    os.makedirs(ruta_destino, exist_ok=True)
+def save_to_txt(data, destination_path, file_name="hogares_unificados.txt"):
+    destination_file = os.path.join(destination_path, file_name)
+    os.makedirs(destination_path, exist_ok=True)
 
-    with open(ruta_completa, mode='w', encoding='utf-8', newline='') as archivo_txt:
-        writer = csv.writer(archivo_txt, delimiter=";")
-        writer.writerows(datos)
+    with open(destination_file, mode='w', encoding='utf-8', newline='') as file_txt:
+        writer = csv.writer(file_txt, delimiter=";")
+        writer.writerows(data)
 
-    print(f"✅ Archivo TXT guardado en: {ruta_completa}")
+    print(f"✅ Archivo TXT guardado en: {destination_file}")
 
+# Procesar archivos
 def add_columns_header(header, *args):
     """
     Agrega columnas a una lista.

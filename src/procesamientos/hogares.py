@@ -31,7 +31,6 @@ def clasificar_hogar_techo(material_nro):
 def clasificar_hogar_densidad_hab(cant_personas, cant_hab):
     cant_hab=int(cant_hab)
     cant_personas=int(cant_personas)
-    print(f"INGRESO: cant_personas={cant_personas}, cant_hab={cant_hab}")
         # Intentamos dividir las variables
     personas_por_hab = float(cant_personas / cant_hab)
 
