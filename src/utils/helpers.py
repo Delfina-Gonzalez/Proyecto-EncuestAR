@@ -27,7 +27,7 @@ def process_file(source_path, category="hogar"):
 
             if header is None:
                 header = row[0]
-                header.extend(row[1:])
+                unified_data.extend(row[1:])
             else:
                 if row[0] == header:
                     unified_data.extend(row[1:])
