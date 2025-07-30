@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 # Dirección del proyecto
 PROJECT_ROOT = Path(__file__).parent.parent.parent.resolve()
 
@@ -11,9 +10,14 @@ DATA_PROCESSED_DIR = DATA_DIR / "processed"
 FILENAME_HOGARES_PROCESSED = "hogares_procesados.txt"
 FILENAME_INDIVIDUOS_PROCESSED = "individuos_procesados.txt"
 
+RUTA_ARCHIVO_CANASTA = Path('data') / 'Extras' / 'valores-canasta-basica-alimentos-canasta-basica-total-mensual-2016.csv'
+
 # Direcciones para los archivos procesados
 HOGARES_PROCESSED_DIR = DATA_PROCESSED_DIR / FILENAME_HOGARES_PROCESSED
 INDIVIDUOS_PROCESSED_DIR = DATA_PROCESSED_DIR / FILENAME_INDIVIDUOS_PROCESSED
+
+#Archivo JSON MAPA
+COORDENADAS_AGLOMERADOS=PROJECT_ROOT/"data" / "Extras"/"aglomerados_coordenadas.json"
 
 # Este diccionario contiene los nombres de los aglomerados según su número
 AGLOMERADOS_NOMBRES = {
@@ -48,7 +52,7 @@ AGLOMERADOS_NOMBRES = {
     36: "Río Cuarto",
     38: "San Nicolás - Villa Constitución",
     91: "Rawson - Trelew",
-    93: "Viedma - Carmen de Patagones",
+    93: "Viedma - Carmen de Patagones"
 }
 
 # Este diccionario contiene los nombres de los aglomerados según su número
@@ -69,4 +73,12 @@ NIVELES_EDUCATIVOS = {
     5: "Superior universitario incompleto",
     6: "Superior universitario completo",
     7: "Sin instrucción"
+}
+
+# Meses en cada trimestre
+TRIMESTRES = {
+    1: (1,2,3),
+    2: (4,5,6),
+    3: (7,8,9),
+    4: (10,11,12)
 }
