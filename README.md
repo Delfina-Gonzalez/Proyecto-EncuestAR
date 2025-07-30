@@ -21,7 +21,7 @@ Este proyecto permite:
 Organización (estructura):
 
 ```plaintext
-code/
+Proyecto-EncuestAR/
 ├── data/
 │   ├── clean/                       # Archivos de datos clean en formato .txt.
 │   ├── Extras/                      # Archivos de datos adicionales para procesos (json y csv)
@@ -64,7 +64,7 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 Primero, clona este repositorio a tu máquina local usando Git. Abre tu terminal y ejecuta:
 
 ```bash
-git clone https://gitlab.catedras.linti.unlp.edu.ar/python-2025/proyectos/grupo18/code.git](https://github.com/Delfina-Gonzalez/Proyecto-EncuestAR 
+git clone https://github.com/Delfina-Gonzalez/Proyecto-EncuestAR.git 
 ```
 
 Ingresá tus credenciales de GitLab
@@ -72,7 +72,7 @@ Ingresá tus credenciales de GitLab
 ### 2. **Instalar las dependencias**
 Accede al directorio del proyecto: 
 ```bash
-cd code
+cd Proyecto-EncuestAR
 ```
 
 Crear entorno virtual:
