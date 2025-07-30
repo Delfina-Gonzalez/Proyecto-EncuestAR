@@ -8,7 +8,7 @@ Integrantes:
 
 Dario Micheli, Delfina González, Esteeven Andres Gallegos Calle, Noemí Amalia Gudiño, Pablo Nicolás Luberriaga
 
-*Originalmente se trabajó en: https://gitlab.catedras.linti.unlp.edu.ar/python-2025/proyectos/grupo18/code * (acceso privado)
+Originalmente se trabajó en: https://gitlab.catedras.linti.unlp.edu.ar/python-2025/proyectos/grupo18/code * (acceso privado)
 ---
 
 ## 📊 Descripción y Estructura del proyecto
