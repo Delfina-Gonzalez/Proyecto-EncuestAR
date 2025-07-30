@@ -8,6 +8,7 @@ Integrantes:
 
 Dario Micheli, Delfina González, Esteeven Andres Gallegos Calle, Noemí Amalia Gudiño, Pablo Nicolás Luberriaga
 
+*Originalmente se trabajó en: https://gitlab.catedras.linti.unlp.edu.ar/python-2025/proyectos/grupo18/code * (acceso privado)
 ---
 
 ## 📊 Descripción y Estructura del proyecto
@@ -62,7 +63,7 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 Primero, clona este repositorio a tu máquina local usando Git. Abre tu terminal y ejecuta:
 
 ```bash
-git clone https://gitlab.catedras.linti.unlp.edu.ar/python-2025/proyectos/grupo18/code.git 
+git clone https://gitlab.catedras.linti.unlp.edu.ar/python-2025/proyectos/grupo18/code.git](https://github.com/Delfina-Gonzalez/Proyecto-EncuestAR 
 ```
 
 Ingresá tus credenciales de GitLab
