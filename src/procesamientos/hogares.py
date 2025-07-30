@@ -1,6 +1,5 @@
-
 # ------------------------------------------------------------------------------
-# PROCESAMIENTO HOGARES
+# PROCESAMIENTO HOGARES DETALLE
 # ------------------------------------------------------------------------------
 def clasificar_hogar_hab(cant_personas):
     """
@@ -26,7 +25,39 @@ def clasificar_hogar_hab(cant_personas):
         tipo = "Extendido"
     return tipo
 
+def clasificar_hogar_densidad_hab(cant_personas, cant_hab):
+    """
+    Clasifica la densidad habitacional de un hogar según la relación entre la cantidad de personas 
+    y la cantidad de habitaciones.
 
+    Parámetros:
+        cant_personas (int o str): Número total de personas en el hogar.
+        cant_hab (int o str): Número de habitaciones en el hogar.
+
+    Retorna:
+        str:
+            - "Bajo" si hay menos de 1 persona por habitación.
+            - "Medio" si hay entre 1 y 2 personas por habitación.
+            - "Alto" si hay más de 2 personas por habitación.
+            - "Desconocido" si la cantidad de habitaciones es 0 (para evitar división por cero).
+        None: si los valores no son válidos (por ejemplo, texto que no se puede convertir a entero).
+    """
+    try:
+        cant_personas = int(cant_personas)
+        cant_hab = int(cant_hab)
+       
+        personas_por_hab = cant_personas / cant_hab
+
+        if personas_por_hab < 1:
+            return "Bajo"
+        elif personas_por_hab <= 2:
+            return "Medio"
+        else:
+            return "Alto"
+
+    except (ValueError, TypeError, ZeroDivisionError):
+        return None
+   
 def clasificar_hogar_techo(material_nro):
     """
     Clasifica el tipo de techo de un hogar según tipo de material.
@@ -53,106 +84,126 @@ def clasificar_hogar_techo(material_nro):
         tipo = "No aplica"
     return tipo
 
+def clasificar_hogar_habitabilidad(agua, origen_agua, banio, ubi_banio, tipo_banio, desague, techo_material, piso_material):
 
-def clasificar_hogar_densidad_hab(cant_personas, cant_hab):
-    try:
-        cant_personas = int(cant_personas)
-        cant_hab = int(cant_hab)
+    """
+    Clasifica el nivel de habitabilidad de un hogar en función de diversas variables relacionadas con
+    el acceso a servicios básicos, materiales de construcción y condiciones sanitarias.
 
-        if cant_hab == 0:
-            return "Desconocido"  # Evitar división por cero
+    Parámetros:
+        agua (int): Acceso al agua (1: buena, 2: regular, 3: insuficiente).
+        origen_agua (int): Fuente del agua (1: buena, 2: saludable, 3-4: regular).
+        banio (int): Existencia de baño (0: insuficiente, 1: buena, 2: insuficiente).
+        ubi_banio (int): Ubicación del baño (1: buena, 2: saludable, 3: insuficiente).
+        tipo_banio (int): Tipo de baño (0: insuficiente, 1: buena, 2: saludable, 3: regular).
+        desague (int): Tipo de desagüe (0 o 4: insuficiente, 1: buena, 2-3: saludable).
+        techo_material (str): Material del techo ("Material durable", "Material precario", "No Aplica").
+        piso_material (int): Material del piso (1: buena, 2: saludable, 3-4: regular).
 
-        personas_por_hab = cant_personas / cant_hab
+    Returns:
+        str or None: Nivel de habitabilidad. Posibles valores:
+            - "buena"
+            - "saludable"
+            - "regular"
+            - "insuficiente"
+            - "otro"
+            - None (si los valores no son válidos)
+    """
+    
+    ponderador = {
+        "agua": {1: "buena", 2: "regular", 3: "insuficiente"},
+        "origen_agua": {1: "buena", 2: "saludable", 3: "regular", 4: "regular"},
+        "banio": {0: "insuficiente", 1: "buena", 2: "insuficiente"},
+        "tipo_banio": {0: "insuficiente", 1: "buena", 2: "saludable", 3: "regular"},
+        "desague": {0: "insuficiente", 1: "buena", 2: "saludable", 3: "saludable", 4: "insuficiente"},
+        "piso_material": {1: "buena", 2: "saludable", 3: "regular", 4: "regular"},
+        "ubi_banio": {1: "buena", 2: "regular", 3: "insuficiente"},
+        "techo_material": {
+            "Material durable": "buena",
+            "Material precario": "insuficiente",
+            "No Aplica": "buena"
+        }
+    }
 
-        if personas_por_hab < 1:
-            return "Bajo"
-        elif personas_por_hab <= 2:
-            return "Medio"
-        else:
-            return "Alto"
-
-    except ValueError:
-        return None  # Guarda este valor cuando hay error
-
-
-def clasificar_hogar_habitabilidad(agua, origen_agua, baño, ubi_baño, tipo_baño, desague, techo_material, piso_material):
     try:
         agua = int(agua)
         origen_agua = int(origen_agua)
-        baño = int(baño)
-        tipo_baño = int(tipo_baño)
+        banio = int(banio)
+        ubi_banio = int(ubi_banio)
+        tipo_banio = int(tipo_banio)
         desague = int(desague)
         piso_material = int(piso_material)
-
-        problemas = 0
-
-        # 1. Agua
-        if agua == 2:  # Agua fuera de la vivienda, pero dentro del terreno
-            problemas += 2
-        elif agua == 3:  # Agua fuera del terreno
-            problemas += 3
-
-        # 2. Origen del agua
-        if origen_agua == 2:  # Perforación con bomba a motor
-            problemas += 1
-        elif origen_agua == 3:  # Perforación con bomba manual
-            problemas += 2
-        elif origen_agua == 4:  # Otra fuente
-            problemas += 3
-
-        # 3. Baño
-        if baño == 2:
-            return 'Insuficiente'
-
-        # 4. Ubicación del baño
-        if ubi_baño == 2:  # Baño fuera de la vivienda, pero dentro del terreno
-            problemas += 1
-        elif ubi_baño == 3:   # Baño fuera del terreno
-            problemas += 2
-
-        # 5. Tipo de baño
-        if tipo_baño == 1:  # Inodoro con arrastre de agua
-            problemas += 0
-        elif tipo_baño == 2:  # Inodoro sin arrastre de agua
-            problemas += 3
-        else:  # Letrina
-            problemas += 4
-
-        # 6. Desagüe del baño
-        if desague == 2:  # Desagüe a cámara séptica o pozo ciego
-            problemas += 1
-        elif desague == 3:  # Desagüe solo a pozo ciego
-            problemas += 2
-        elif desague == 4:  # Desagüe a hoyo/excavación
-            problemas += 3
-
-        # 7. Material del techo
-        if techo_material == "Material precario":
-            problemas += 6
-
-        # 8. Material del piso
-        if piso_material == 2:
-            problemas += 1
-        else:  # Material precario
-            problemas += 2
-
-        # Clasificación final según los problemas
-        if problemas >= 10:
-            return "Insuficiente"
-        elif 6 <= problemas < 10:
-            return "Regular"
-        elif 4 <= problemas < 6:
-            return "Saludable"
-        else:
-            return "Buena"
+        techo_material = str(techo_material).strip()
     except ValueError:
-        return None  # Guarda este valor cuando hay error
+        return None
 
+    # Corte directo por condiciones críticas
+    if agua == 3 or banio == 2 or ubi_banio == 3:
+        return "insuficiente"
+
+    # Contador por categoría
+    contador = {'buena': 0, 'saludable': 0, 'regular': 0, 'insuficiente': 0}
+    variables = {
+        "agua": agua,
+        "origen_agua": origen_agua,
+        "banio": banio,
+        "tipo_banio": tipo_banio,
+        "desague": desague,
+        "piso_material": piso_material,
+        "ubi_banio": ubi_banio,
+        "techo_material": techo_material
+    }
+
+    for key, value in variables.items():
+        categoria = ponderador[key].get(value)
+        if categoria:
+            contador[categoria] += 1
+
+    # Clasificación según reglas
+    if 0 < contador["insuficiente"] <=2 and contador["regular"] >= 2:
+        return "insuficiente"
+    
+    elif contador["regular"] >= 5:
+        return "insuficiente"
+
+    elif 0 < contador["insuficiente"] <=2 and  contador["regular"] == 1:
+        return "regular"
+
+    elif desague == 4:
+        return "regular"
+    
+    elif agua == 2:
+        return "regular"
+  
+    
+    elif contador["regular"] >= 3:  
+        return "regular"
+    
+    elif contador["insuficiente"]==1 and contador["regular"] == 0:
+        return "Saludable"
+    
+    elif contador["insuficiente"]<=2 and contador["regular"] == 0:
+        return "Saludable"
+    
+
+    elif contador["buena"] >= 4:
+        return "buena"
+    
+    else:
+        return "buena"
+
+from src.utils.helpers import extraer_fecha,actualizarmaxmin_fechas
+# -------------------------------------------------------------------------------
+# PROCESAMIENTO DE HOGARES
+# -------------------------------------------------------------------------------
 
 def procesar_hogares(header, data):
     """
     Procesa los datos de los hogares y agrega nuevas columnas con clasificaciones.
     """
+    # Inicializo las fechas mínima y máxima
+    min_fecha = None
+    max_fecha = None
 
     # Agrego las nuevas columnas al header
     header.extend(["TIPO_HOGAR", "MATERIAL_TECHUMBRE",
@@ -174,3 +225,15 @@ def procesar_hogares(header, data):
         # Clasifico la condición de habitabilidad del hogar basado en varios atributos relacionados con la vivienda
         row['CONDICION_DE_HABITABILIDAD'] = clasificar_hogar_habitabilidad(
             row['IV6'], row['IV7'], row['IV8'], row['IV9'], row['IV10'], row['IV11'], row['MATERIAL_TECHUMBRE'], row['IV3'])
+        
+        fecha_actual = extraer_fecha(row)
+        if fecha_actual:
+            min_fecha, max_fecha = actualizarmaxmin_fechas(fecha_actual, min_fecha, max_fecha)
+    return min_fecha, max_fecha
+
+
+        
+      
+
+
+
