@@ -139,4 +139,3 @@ def actualizarmaxmin_fechas(fecha_actual, min_fecha, max_fecha):
         max_fecha = fecha_actual
     return min_fecha, max_fecha
 
-
