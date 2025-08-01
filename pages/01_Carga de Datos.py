@@ -190,3 +190,4 @@ st.video("https://www.youtube.com/watch?v=bILbA6-mzWw")
 
 # Línea divisoria cálida
 st.markdown('<hr style="border: 1px solid #dddddd;">', unsafe_allow_html=True)
+
