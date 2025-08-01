@@ -23,7 +23,7 @@ st.markdown('<hr style="border: 1px solid #dddddd;">', unsafe_allow_html=True)
 st.markdown('<h3>🔽 ¿En qué consiste?</h3>', unsafe_allow_html=True)
 st.markdown("""<p
             style="text-align: justify;"><strong>Encuest.AR</strong> es una aplicación diseñada para cargar, visualizar y obtener información resumida y jerarquizada. Utilizamos sets de datos brindados por la  <a href="https://www.indec.gob.ar/ftp/cuadros/sociedad/Gacetilla_EPHContinua.pdf" target="_blank"><strong>EPH</strong></a> (Encuesta Permanente de Hogares), los cuales son facilitados de forma pública por el Estado Nacional.
-Podés cargar tus archivos en la sección "Carga de Archivos" (accesible desde el menú lateral izquierdo), y obtener gráficos interactivos que permiten analizar los datasets de EPH cargados en sistema.
+Podés cargar tus archivos en la sección "Carga de Datos" (accesible desde el menú lateral izquierdo), y obtener gráficos interactivos que permiten analizar los datasets de EPH cargados en sistema.
 </p>
 """ , unsafe_allow_html=True)
 
