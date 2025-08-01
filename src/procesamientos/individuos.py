@@ -107,3 +107,4 @@ def add_extra_data(header, data):
             min_fecha, max_fecha = actualizarmaxmin_fechas(fecha_actual, min_fecha, max_fecha)
 
     return min_fecha, max_fecha
+
