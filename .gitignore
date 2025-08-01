@@ -176,3 +176,4 @@ cython_debug/
 
 #ignorar todos los .txt en la carpeta data y subcarpetas
 data/**/*.txt
+
